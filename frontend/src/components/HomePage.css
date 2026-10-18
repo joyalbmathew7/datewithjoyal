@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap");
+
+.home-page {
+  --cream: #fff8f0;
+  --cream-deep: #fdeee2;
+  --blush: #fbdde2;
+  --blush-soft: #fdeef0;
+  --rose: #9f1239;
+  --rose-dark: #7f0e2d;
+  --ink: #3b2a2e;
+  --muted: #7a6468;
+  --line: #f2d5d9;
+
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Nunito Sans", system-ui, sans-serif;
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  text-align: center;
+  padding: 110px 20px 120px;
+  background:
+    radial-gradient(circle at 15% 20%, var(--blush) 0, transparent 45%),
+    radial-gradient(circle at 85% 80%, var(--cream-deep) 0, transparent 50%),
+    var(--blush-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-label {
+  display: inline-block;
+  background: #fff;
+  color: var(--rose);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.12;
+  margin: 26px 0 20px;
+}
+
+.hero-description {
+  max-width: 520px;
+  margin: 0 auto 34px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.hero-button {
+  display: inline-block;
+  background: var(--rose);
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(159, 18, 57, 0.25);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-button:hover {
+  background: var(--rose-dark);
+  transform: translateY(-2px);
+}
+
+.hero-button:focus-visible {
+  outline: 3px solid var(--blush);
+  outline-offset: 3px;
+}
+
+/* ---------- Experiences ---------- */
+
+.experiences {
+  padding: 80px 7%;
+  text-align: center;
+}
+
+.experiences h2,
+.booking-intro h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  margin: 0;
+}
+
+.experience-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.experience-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 34px 22px;
+  box-shadow: 0 8px 24px rgba(159, 18, 57, 0.06);
+}
+
+.experience-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  background: var(--blush);
+  border-radius: 50%;
+}
+
+.experience-card h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.experience-card p,
+.booking-intro p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---------- Booking intro ---------- */
+
+.booking-intro {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--cream-deep);
+  border-top: 1px solid var(--line);
+}
+
+.booking-intro p {
+  margin: 12px 0 28px;
+}
+
+/* ---------- Footer ---------- */
+
+.home-footer {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  background: var(--blush-soft);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 650px) {
+  .hero {
+    padding: 70px 20px 80px;
+  }
+
+  .experiences,
+  .booking-intro {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .experience-list {
+    grid-template-columns: 1fr;
+  }
+}

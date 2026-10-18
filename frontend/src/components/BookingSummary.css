@@ -1,0 +1,29 @@
+
+.summary-details {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #222222;
+}
+
+.summary-details p {
+  margin: 12px 0;
+  color: #222222;
+  overflow-wrap: anywhere;
+}
+
+.summary-details h2 {
+  margin-top: 24px;
+  color: #9f1239;
+}
+
+.summary-button {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: #9f1239;
+  color: #ffffff;
+  text-decoration: none;
+}

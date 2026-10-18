@@ -1,0 +1,433 @@
+.outfit-selector {
+  --cream: #fff8f0;
+  --cream-deep: #fdeee2;
+  --blush: #fbdde2;
+  --blush-soft: #fdeef0;
+  --rose: #9f1239;
+  --rose-dark: #7f0e2d;
+  --ink: #3b2a2e;
+  --muted: #7a6468;
+  --line: #f2d5d9;
+
+  padding: 26px 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  color: var(--ink);
+}
+
+.outfit-selector h2 {
+  margin: 0 0 6px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.outfit-description {
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.outfit-status {
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+  background: var(--blush-soft);
+  border-radius: 14px;
+  color: var(--muted);
+}
+
+.outfit-error {
+  margin: 0;
+  padding: 14px 16px;
+  background: #fff0f0;
+  border: 1px solid #f5b5bf;
+  border-radius: 14px;
+  color: var(--rose-dark);
+}
+
+/* ---------- Step tabs ---------- */
+
+.outfit-steps {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.outfit-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--cream);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.outfit-step:hover {
+  border-color: #e9b8c0;
+}
+
+.outfit-step.active {
+  background: var(--blush-soft);
+  border-color: var(--rose);
+}
+
+.outfit-step-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  background: var(--blush);
+  border-radius: 50%;
+  color: var(--rose);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.outfit-step.active .outfit-step-mark,
+.outfit-step.done .outfit-step-mark {
+  background: var(--rose);
+  color: #fff;
+}
+
+.outfit-step-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.outfit-step-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.outfit-step-status {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Category + carousel ---------- */
+
+.outfit-category h3 {
+  margin: 0 0 14px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.outfit-empty {
+  margin: 0 0 18px;
+  padding: 18px;
+  text-align: center;
+  background: var(--blush-soft);
+  border-radius: 14px;
+  color: var(--muted);
+}
+
+.outfit-carousel {
+  position: relative;
+}
+
+.outfit-track {
+  display: flex;
+  gap: 14px;
+  padding: 6px 2px 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blush) transparent;
+}
+
+.outfit-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.outfit-track::-webkit-scrollbar-thumb {
+  background: var(--blush);
+  border-radius: 999px;
+}
+
+.outfit-card {
+  flex: 0 0 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: var(--cream);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  color: var(--ink);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.outfit-card:hover {
+  border-color: #e9b8c0;
+}
+
+.outfit-card.selected {
+  background: var(--blush-soft);
+  border-color: var(--rose);
+  box-shadow: 0 8px 20px rgba(159, 18, 57, 0.15);
+}
+
+.outfit-card:focus-visible,
+.outfit-step:focus-visible,
+.outfit-arrow:focus-visible,
+.outfit-primary:focus-visible,
+.outfit-link-button:focus-visible {
+  outline: 3px solid var(--blush);
+  outline-offset: 2px;
+}
+
+.outfit-image-wrap {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--cream-deep);
+  border-radius: 12px;
+}
+
+.outfit-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.outfit-selected {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  background: var(--rose);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.outfit-item-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.outfit-specifications {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Arrows */
+
+.outfit-arrow {
+  position: absolute;
+  top: 38%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0 0 3px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(159, 18, 57, 0.18);
+  color: var(--rose);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.outfit-arrow:hover:not(:disabled) {
+  background: var(--blush);
+}
+
+.outfit-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.outfit-arrow-prev {
+  left: -14px;
+}
+
+.outfit-arrow-next {
+  right: -14px;
+}
+
+/* ---------- Actions ---------- */
+
+.outfit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.outfit-actions .outfit-primary {
+  margin-left: auto;
+}
+
+.outfit-primary {
+  padding: 12px 24px;
+  background: var(--rose);
+  border: 1.5px solid var(--rose);
+  border-radius: 999px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.outfit-primary:hover {
+  background: var(--rose-dark);
+}
+
+/* "Skip" reads as secondary: outlined instead of filled */
+.outfit-primary.is-skip {
+  background: #fff;
+  color: var(--rose);
+}
+
+.outfit-primary.is-skip:hover {
+  background: var(--blush-soft);
+}
+
+.outfit-link-button {
+  padding: 8px 4px;
+  background: none;
+  border: none;
+  color: var(--rose);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.outfit-link-button:disabled {
+  color: #c9b3b7;
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+/* ---------- Finished summary ---------- */
+
+.outfit-summary {
+  padding: 18px;
+  background: var(--blush-soft);
+  border-radius: 18px;
+}
+
+.outfit-summary h3 {
+  margin: 0 0 14px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.outfit-summary-list {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.outfit-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.outfit-summary-item img,
+.outfit-summary-empty {
+  flex: none;
+  width: 52px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--cream-deep);
+}
+
+.outfit-summary-empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 550px) {
+  .outfit-selector {
+    padding: 20px 14px;
+  }
+
+  .outfit-steps {
+    gap: 6px;
+  }
+
+  .outfit-step {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 6px;
+    text-align: center;
+  }
+
+  .outfit-step-text {
+    align-items: center;
+  }
+
+  .outfit-card {
+    flex-basis: 150px;
+  }
+
+  .outfit-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 22px;
+  }
+
+  .outfit-arrow-prev {
+    left: -6px;
+  }
+
+  .outfit-arrow-next {
+    right: -6px;
+  }
+
+  .outfit-actions .outfit-primary {
+    width: 100%;
+    margin-left: 0;
+    order: 3;
+  }
+}

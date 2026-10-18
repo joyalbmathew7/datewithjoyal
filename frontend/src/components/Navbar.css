@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Nunito+Sans:wght@700&display=swap");
+
+.navbar {
+  --cream: #fff8f0;
+  --blush: #fbdde2;
+  --rose: #9f1239;
+  --rose-dark: #7f0e2d;
+  --ink: #3b2a2e;
+  --line: #f2d5d9;
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 7%;
+  background: rgba(255, 248, 240, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.navbar-heart {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
+  color: var(--rose);
+  background: var(--blush);
+  border-radius: 50%;
+}
+
+.navbar-button {
+  display: inline-block;
+  background: var(--rose);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(159, 18, 57, 0.22);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-button:hover {
+  background: var(--rose-dark);
+  transform: translateY(-1px);
+}
+
+.navbar-brand:focus-visible,
+.navbar-button:focus-visible {
+  outline: 3px solid var(--blush);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 5%;
+  }
+
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .navbar-button {
+    padding: 9px 16px;
+    font-size: 14px;
+  }
+}
