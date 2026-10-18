@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-wnu)$lc!n+0w55tb$%^-97)om2!m-k42p17$il=2ngly825d0&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.7", "localhost", "127.0.0.1"]
-
+ALLOWED_HOSTS = [
+    "datewithjoyal.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -146,7 +149,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "https://frontend-psi-seven-55.vercel.app/"
 ]
 
 DATABASES = {
