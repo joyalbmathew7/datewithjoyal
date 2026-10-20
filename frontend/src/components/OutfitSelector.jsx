@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./OutfitSelector.css";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://127.0.0.1:8000";
 
+const OUTFITS_API_URL =
+  `${API_URL.replace(/\/+$/, "")}/api/v1/outfits/`;
 function OutfitSelector({ onSelectionChange }) {
   const [categories, setCategories] = useState([]);
   const [selectedItems, setSelectedItems] = useState({});
@@ -18,14 +22,16 @@ function OutfitSelector({ onSelectionChange }) {
   useEffect(() => {
     async function loadOutfits() {
       try {
-        const response = await fetch(`${API_URL}/outfits/`);
+       const response = await fetch(OUTFITS_API_URL);
 
-        if (!response.ok) {
-          throw new Error("Could not load clothing options.");
-        }
+if (!response.ok) {
+  throw new Error(`Failed to load outfits: ${response.status}`);
+}
 
-        const data = await response.json();
-        setCategories(data);
+const data = await response.json();
+console.log("Clothing API response:", data);
+setCategories(data);
+
       } catch (err) {
         setError(err.message);
       } finally {
