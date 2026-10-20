@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BookingPage.css";
 import OutfitSelector from "./OutfitSelector";
+const API_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://127.0.0.1:8000";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+const BOOKING_API_BASE = `${API_URL.replace(/\/+$/, "")}/api/v1`;
+// const BOOKING_API_BASE = `${API_URL.replace(/\/+$/, "")}/api/v1`;ITE_API_BASE_URL;
 
 function getMinutes(time) {
   const [hours, minutes] = time.slice(0, 5).split(":").map(Number);
@@ -31,7 +35,9 @@ function BookingPage() {
   useEffect(() => {
     async function loadAvailability() {
       try {
-        const response = await fetch(`${API_URL}/availability/`);
+        const response = await fetch(
+  `${BOOKING_API_BASE}/availability/`
+);
 
         if (!response.ok) {
           throw new Error("Could not load available dates.");
@@ -115,23 +121,23 @@ function BookingPage() {
     setSubmitError("");
 
     try {
-      const response = await fetch(`${API_URL}/bookings/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customer_name: customerName,
-          customer_phone: customerPhone,
-          customer_age: Number(customerAge),
-          district: district,
-          availability: Number(selectedSlotId),
-          start_time: startTime,
-          booked_hours: Number(bookedHours),
-          activity_ids: [],
-          outfit_item_ids: selectedOutfits.map((item) => item.item_id),
-        }),
-      });
+    const response = await fetch(`${BOOKING_API_BASE}/bookings/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        customer_age: Number(customerAge),
+        district: district,
+        availability: Number(selectedSlotId),
+        start_time: startTime,
+        booked_hours: Number(bookedHours),
+        activity_ids: [],
+        outfit_item_ids: selectedOutfits.map((item) => item.item_id),
+      }),
+    });
 
       const data = await response.json();
 
