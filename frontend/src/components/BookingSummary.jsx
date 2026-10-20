@@ -5,8 +5,12 @@ import "./BookingSummary.css";
 const WHATSAPP_NUMBER = "919061735003";
 
 const PAYMENT_API_URL =
-  import.meta.env.VITE_PAYMENT_API_URL ||
-  "http://127.0.0.1:8000/api";
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://127.0.0.1:8000";
+
+const PAYMENT_API_BASE = `${PAYMENT_API_URL.replace(/\/+$/, "")}/api`;
+
+
 
 function BookingSummary() {
   const { state } = useLocation();
@@ -52,7 +56,7 @@ function BookingSummary() {
 
       // Step 1: Ask Django to create a payment order.
       const orderResponse = await fetch(
-        `${PAYMENT_API_URL}/create-order/`,
+        `${PAYMENT_API_BASE}/create-order/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -83,7 +87,7 @@ function BookingSummary() {
 
             // Step 3: Ask Django to verify the payment.
             const verifyResponse = await fetch(
-              `${PAYMENT_API_URL}/verify-payment/`,
+              `${PAYMENT_API_BASE}/verify-payment/`,
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -189,7 +193,7 @@ function BookingSummary() {
         {paymentSuccess && (
   <>
     <a
-  href={`${PAYMENT_API_URL}/booking-pdf/${booking.id}/`}
+  href={`${PAYMENT_API_BASE}/booking-pdf/${booking.id}/`}
   className="booking-submit"
   target="_blank"
   rel="noopener noreferrer"
