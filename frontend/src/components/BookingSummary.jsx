@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./BookingSummary.css";
+
 const WHATSAPP_NUMBER = "919061735003";
 
 const PAYMENT_API_URL =
@@ -10,10 +11,9 @@ const PAYMENT_API_URL =
 
 const PAYMENT_API_BASE = `${PAYMENT_API_URL.replace(/\/+$/, "")}/api`;
 
-
-
 function BookingSummary() {
   const { state } = useLocation();
+
   const [paying, setPaying] = useState(false);
   const [message, setMessage] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -24,6 +24,7 @@ function BookingSummary() {
         <div className="booking-container">
           <h1>No booking found</h1>
           <p>Please create a booking first.</p>
+
           <Link to="/booking" className="summary-button">
             Go to Booking
           </Link>
@@ -59,8 +60,12 @@ function BookingSummary() {
         `${PAYMENT_API_BASE}/create-order/`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ booking_id: booking.id }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            booking_id: booking.id,
+          }),
         }
       );
 
@@ -83,14 +88,18 @@ function BookingSummary() {
 
         handler: async function (response) {
           try {
-            setMessage("Payment received. Verifying with the server...");
+            setMessage(
+              "Payment received. Verifying with the server..."
+            );
 
             // Step 3: Ask Django to verify the payment.
             const verifyResponse = await fetch(
               `${PAYMENT_API_BASE}/verify-payment/`,
               {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                  "Content-Type": "application/json",
+                },
                 body: JSON.stringify({
                   booking_id: booking.id,
                   razorpay_order_id: response.razorpay_order_id,
@@ -108,10 +117,10 @@ function BookingSummary() {
               );
             }
 
-              setPaymentSuccess(true);
-              setMessage("Payment verified! Your booking is confirmed.");
-
-
+            setPaymentSuccess(true);
+            setMessage(
+              "Payment verified! Your booking is confirmed."
+            );
           } catch (error) {
             setMessage(
               `${error.message} Do not pay again immediately. Check the payment status first.`
@@ -130,7 +139,9 @@ function BookingSummary() {
           },
         },
 
-        theme: { color: "#9f1239" },
+        theme: {
+          color: "#9f1239",
+        },
       };
 
       const checkout = new window.Razorpay(options);
@@ -138,7 +149,8 @@ function BookingSummary() {
       checkout.on("payment.failed", function (response) {
         setPaying(false);
         setMessage(
-          response.error?.description || "Payment failed. Please try again."
+          response.error?.description ||
+            "Payment failed. Please try again."
         );
       });
 
@@ -159,16 +171,35 @@ function BookingSummary() {
         </p>
 
         <div className="summary-details">
-          <p><strong>Name:</strong> {customerName}</p>
-          <p><strong>Booking ID:</strong> {booking.id}</p>
-          <p><strong>Date:</strong> {selectedDate}</p>
-          <p><strong>District:</strong> {district}</p>
-          <p><strong>Start time:</strong> {startTime}</p>
-          <p><strong>Duration:</strong> {bookedHours} hours</p>
+          <p>
+            <strong>Name:</strong> {customerName}
+          </p>
+
+          <p>
+            <strong>Booking ID:</strong> {booking.id}
+          </p>
+
+          <p>
+            <strong>Date:</strong> {selectedDate}
+          </p>
+
+          <p>
+            <strong>District:</strong> {district}
+          </p>
+
+          <p>
+            <strong>Start time:</strong> {startTime}
+          </p>
+
+          <p>
+            <strong>Duration:</strong> {bookedHours} hours
+          </p>
+
           <p>
             <strong>Status:</strong>{" "}
             {paymentSuccess ? "CONFIRMED" : booking.status}
           </p>
+
           <h2>Total: ₹{booking.total_amount}</h2>
         </div>
 
@@ -177,7 +208,6 @@ function BookingSummary() {
             {message}
           </p>
         )}
-
 
         {!paymentSuccess && (
           <button
@@ -191,23 +221,23 @@ function BookingSummary() {
         )}
 
         {paymentSuccess && (
-  <>
-    <a
-  href={`${PAYMENT_API_BASE}/booking-pdf/${booking.id}/`}
-  className="booking-submit"
-  target="_blank"
-  rel="noopener noreferrer"
-  download
->
-  Download Booking PDF
-</a>
+          <>
+            <a
+              href={`${PAYMENT_API_BASE}/booking-pdf/${booking.id}/`}
+              className="booking-submit"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              Download Booking PDF
+            </a>
 
-    <button
-      type="button"
-      className="booking-submit whatsapp-button"
-      onClick={() => {
-        const whatsappMessage = encodeURIComponent(
-          `Hi, I've completed my booking with Rent a Companion.
+            <button
+              type="button"
+              className="booking-submit whatsapp-button"
+              onClick={() => {
+                const whatsappMessage = encodeURIComponent(
+                  `Hi, I've completed my booking with Rent a Companion.
 Booking ID: ${booking.id}
 Name: ${customerName}
 District: ${district}
@@ -216,20 +246,19 @@ Start time: ${startTime}
 Duration: ${bookedHours} hours
 
 I'd like to coordinate my booking details.`
-        );
+                );
 
-        window.open(
-          `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
-      }}
-    >
-      Message me on WhatsApp
-    </button>
-  </>
-)}
-
+                window.open(
+                  `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }}
+            >
+              Message me on WhatsApp
+            </button>
+          </>
+        )}
 
         <p>
           <Link to="/booking">Back to booking form</Link>
