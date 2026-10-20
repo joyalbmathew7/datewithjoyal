@@ -97,6 +97,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # CORS Settings
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
+    "https://frontend-psi-seven-55.vercel.app",
     "https://datewithjoyal-joyal12.vercel.app",
     "http://localhost:5173",
 ]
