@@ -36,7 +36,10 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
-
+FRONTEND_URL = os.getenv(
+    "FRONTEND_URL",
+    "http://localhost:5173",
+).rstrip("/")
 
 # Application definition
 
@@ -92,10 +95,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # CORS Settings
+# CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "https://frontend-psi-seven-55.vercel.app",
+    "https://datewithjoyal-joyal12.vercel.app",
+    "http://localhost:5173",
 ]
-
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
